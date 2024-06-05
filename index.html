@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile Form</title>
+  </head>
+  <body>
+    <h1>User Profile Form</h1>
+    <form id="userProfileForm">
+      <label for="name">Enter Your Name:</label><br />
+      <input type="text" id="name" /><br /><br />
+
+      <label for="fullAddress">Enter Your Full Address:</label><br />
+      <textarea
+        name="fullAddress"
+        id="fullAddress"
+        rows="5"
+        cols="40"
+      ></textarea>
+      <br /><br />
+
+      <label for="gender">Select Your Gender:</label><br />
+      <label for="male">
+        <input type="radio" name="gender" id="male" value="Male" /> Male </label
+      ><br />
+      <label for="female">
+        <input type="radio" name="gender" id="female" value="Female" />
+        Female </label
+      ><br />
+      <label for="other">
+        <input type="radio" name="gender" id="other" value="Other" />
+        Other </label
+      ><br /><br />
+
+      <label for="interests">Select Multiple Interests:</label>
+      <br />
+      <label for="reading">
+        <input type="checkbox" name="interests" id="reading" value="Reading" />
+        Reading </label
+      ><br />
+      <label for="gardening">
+        <input
+          type="checkbox"
+          name="interests"
+          id="gardening"
+          value="Gardening"
+        />
+        Gardening </label
+      ><br />
+      <label for="painting">
+        <input
+          type="checkbox"
+          name="interests"
+          id="painting"
+          value="Painting"
+        />
+        Painting </label
+      ><br /><br />
+
+      <label for="selectFavColor">Select Favorite Color:</label>
+      <br />
+      <select name="selectFavColor" id="selectFavColor">
+        <option value="">Select color</option>
+        <option value="Red">Red</option>
+        <option value="Blue">Blue</option>
+        <option value="Green">Green</option>
+      </select>
+      <br /><br />
+
+      <input type="submit" value="Submit" />
+    </form>
+
+    <div id="formResult"></div>
+
+    <script>
+      const userProfileForm = document.querySelector("#userProfileForm");
+      userProfileForm.addEventListener("submit", function () {
+        event.preventDefault();
+
+        const name = document.querySelector("#name").value;
+        const fullAddress = document.querySelector("#fullAddress").value;
+        const gender = document.querySelector(
+          'input[name="gender"]:checked'
+        ).value;
+
+        const interests = document.querySelectorAll(
+          'input[name="interests"]:checked'
+        );
+        let selectedInterests = [];
+        for (let i = 0; i < interests.length; i++) {
+          selectedInterests.push(interests[i].value);
+        }
+
+        const selectedFavColor =
+          document.querySelector("#selectFavColor").value;
+
+        const userInputValues = `
+      <h2>Submitted Information</h2>
+      <p>Name: ${name}</p>
+      <p>Full Address: ${fullAddress}</p>
+      <p>Gender: ${gender}</p>
+      <p>Interests: ${selectedInterests.join(", ")}</p>
+      <p>Favourite Color: ${selectedFavColor}</p>`;
+
+        const formResult = document.querySelector("#formResult");
+        formResult.innerHTML = userInputValues;
+      });
+    </script>
+  </body>
+</html>
